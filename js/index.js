@@ -20,6 +20,7 @@ let afterTomorrowDegreeC = document.querySelector("#after-tomorrow .body .degree
 let afterTomorrowInfo = document.querySelector("#after-tomorrow .body .info");
 
 
+
 // get day
 let day = [
   "sunday",
@@ -56,6 +57,8 @@ let afterTomorrow = [
   "tuesday"
 ][new Date().getDay() + 2];
 
+
+
 // push days
 
 todayDay.innerHTML = day;
@@ -67,14 +70,14 @@ async function getWeather() {
   try {
     let result = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=b85acf54844f4e18bb5205153240812&q=${getLocation.value}&days=3&aqi=no&alerts=no`);
     let data = await result.json();
-    console.log(data);
+    // console.log(data);
     // today
     todayIcon.firstChild.setAttribute("src",`https:${data.current.condition.icon}`);
     todayDegree.innerHTML = data.current.heatindex_c;
     todayCity.innerHTML = data.location.name;
     todayInfo.innerHTML = data.current.condition.text;
     // tomorrow
-    console.log(data.forecast.forecastday[0].day.maxtemp_c);
+    // console.log(data.forecast.forecastday[0].day.maxtemp_c);
     tomorrowDegree.innerHTML = data.forecast.forecastday[0].day.avgtemp_c
     tomorrowDegreeC.innerHTML = data.forecast.forecastday[0].day.avgtemp_f
     tomorrowInfo.innerHTML = data.forecast.forecastday[0].day.condition.text
@@ -85,7 +88,7 @@ async function getWeather() {
     afterTomorrowInfo.innerHTML = data.forecast.forecastday[1].day.condition.text
     afterTomorrowIcon.firstChild.setAttribute("src",`https:${data.forecast.forecastday[1].day.condition.icon}`);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 }
 
@@ -96,14 +99,14 @@ async function defaultWeather() {
       `https://api.weatherapi.com/v1/forecast.json?key=b85acf54844f4e18bb5205153240812&q=Palestine&days=3&aqi=no&alerts=no`
     );
     let data = await result.json();
-    console.log(data);
+    // console.log(data);
     // today
     todayIcon.firstChild.setAttribute("src",`https:${data.current.condition.icon}`);
     todayDegree.innerHTML = data.current.heatindex_c;
     todayCity.innerHTML = data.location.name;
     todayInfo.innerHTML = data.current.condition.text;
     // tomorrow
-    console.log(data.forecast.forecastday[0].day.maxtemp_c);
+    // console.log(data.forecast.forecastday[0].day.maxtemp_c);
     tomorrowDegree.innerHTML = data.forecast.forecastday[0].day.avgtemp_c
     tomorrowDegreeC.innerHTML = data.forecast.forecastday[0].day.avgtemp_f
     tomorrowInfo.innerHTML = data.forecast.forecastday[0].day.condition.text
@@ -121,6 +124,6 @@ defaultWeather();
 
     // just test we had a copy
     getLocation.addEventListener("keypress", function (e) {
-      console.log(e.target.value);
+      // console.log(e.target.value);
       getWeather();
     });
